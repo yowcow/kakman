@@ -1,0 +1,14 @@
+{application, kakman,
+ [{description, "An OTP application for writing logs into files"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {mod, {kakman_app, []}},
+  {applications,
+   [kernel,
+    stdlib
+   ]},
+  {env,[]},
+  {modules, []},
+  {licenses, ["Apache 2.0"]},
+  {links, []}
+ ]}.
