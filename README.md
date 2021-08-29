@@ -3,6 +3,7 @@ kakman
 
 An OTP application for writing things into files.
 
+
 BUILD
 -----
 
@@ -23,15 +24,8 @@ Have a configuration in sys.config or similar:
                          sup_id       => output1_sup,
                          handler_name => output1,
                          file         => "output1.log",
-                         rotation     => 0,     %% keep no old output files
-                         maxlen       => 1000   %% write current file up to 1000 bytes
-                        },
-                       #{
-                         sup_id       => output2_sup,
-                         handler_name => output2,
-                         file         => "output2.log",
-                         rotation     => 10,    %% keep up to 10 output files
-                         maxdur       => 60     %% write to current file up to 60 seconds
+                         rotations    => 5,     %% keep 5 generations
+                         maxage       => 60     %% write for 60 seconds, then rotate
                         }
                       ]}
           ]}
@@ -56,8 +50,8 @@ Writers can be added while running:
 kakman:start_writer(
     output3,
     #{ filepath => "logs/output3.log",
-       rotation => 0,
-       maxlen   => 5000
+       rotations => 0,
+       maxage => 10
      }).
 ```
 
@@ -68,3 +62,12 @@ Added writers can be removed while running:
 ```erlang
 kakman:stop_writer(output3).
 ```
+
+
+WORK IN PROGRESS
+----------------
+
+* Testing
+* Rotation by written byte length
+* Delayed write
+* Documentation
